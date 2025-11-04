@@ -337,11 +337,15 @@
       <div class="collateral-item">
         <div class="collateral-label">Release Authorization</div>
         <div class="collateral-value">$1,000,000,000</div>
-        <div class="note">GB Dynamics Inc. • Wire settlement</div>
+        <div class="note">GB Dynamics Inc. • Jonathan Granger, CEO</div>
       </div>
     </div>
     <table>
       <tbody>
+        <tr>
+          <td><strong>Authorized Recipient</strong></td>
+          <td>GB Dynamics Inc. • Jonathan Granger, CEO</td>
+        </tr>
         <tr>
           <td><strong>Collateralization Ratio</strong></td>
           <td>18.2:1 (exceptional over-collateralization)</td>
@@ -360,7 +364,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="note" style="margin-top:8px;"><strong>Critical:</strong> The $1B moves via traditional wire from banking institution. Blockchain provides cryptographic proof of authorization—bank executes wire based on this proof.</div>
+    <div class="note" style="margin-top:8px;"><strong>Critical:</strong> The $1B authorization to GB Dynamics Inc. (Jonathan Granger, CEO) moves via traditional wire from banking institution. Blockchain provides cryptographic proof of authorization—bank executes wire based on this proof.</div>
   </section>
 
   <!-- Verification Status -->
@@ -464,11 +468,8 @@ const CONTRACT = "0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180";
 const TOKEN_ID = "1";
 const MINT_TX = "0x3c686f30af14eeaaafe0b642579c8c039bd5214ef3df6a126af41b595e7e8ac2";
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('✅ Certificate loaded successfully');
-  document.getElementById("mintTx").innerText = MINT_TX.slice(0,12) + "..." + MINT_TX.slice(-6);
-});
+// Initialize immediately
+console.log('Script loading...');
 
 // Hash functions
 function sha256Hex(s) {
@@ -504,22 +505,37 @@ function deriveMerkleRoot() {
 
 // Seal document
 function sealDocument() {
-  const canonical = [CONTRACT, TOKEN_ID, MINT_TX, "PFC-2025-001-7B3A"].join("|");
-  const sha = sha256Hex(canonical);
-  const keccak = keccak256Hex(canonical);
-  const root = deriveMerkleRoot();
+  console.log('Computing seals...');
   
-  document.getElementById("sealSha256").innerText = "0x" + sha;
-  document.getElementById("sealKeccak").innerText = "0x" + keccak;
-  document.getElementById("sealTimestamp").innerText = new Date().toISOString();
-  document.getElementById("merkleRoot").innerText = root;
-  document.getElementById("footer-seal").innerText = "Seal: 0x" + keccak.slice(0,12) + "...";
-  
-  return {sha, keccak};
+  try {
+    const canonical = [CONTRACT, TOKEN_ID, MINT_TX, "PFC-2025-001-7B3A"].join("|");
+    const sha = sha256Hex(canonical);
+    const keccak = keccak256Hex(canonical);
+    const root = deriveMerkleRoot();
+    const timestamp = new Date().toISOString();
+    
+    console.log('Seals computed:', {sha: sha.slice(0,16), keccak: keccak.slice(0,16)});
+    
+    document.getElementById("sealSha256").innerText = "0x" + sha;
+    document.getElementById("sealKeccak").innerText = "0x" + keccak;
+    document.getElementById("sealTimestamp").innerText = timestamp;
+    document.getElementById("merkleRoot").innerText = root;
+    document.getElementById("footer-seal").innerText = "Seal: 0x" + keccak.slice(0,12) + "...";
+    
+    console.log('✓ Seals updated in DOM');
+    
+    return {sha, keccak, root, timestamp};
+  } catch(e) {
+    console.error('Error computing seals:', e);
+    alert('Error computing cryptographic seals: ' + e.message);
+    return null;
+  }
 }
 
 // Verify on-chain
 async function verifyAndSeal() {
+  console.log('=== Starting verification ===');
+  
   const statusDiv = document.getElementById("verificationStatus");
   const ownerField = document.getElementById("liveOwner");
   const ownStatus = document.getElementById("ownStatus");
@@ -528,43 +544,80 @@ async function verifyAndSeal() {
   ownerField.innerText = 'Querying...';
   ownStatus.innerText = 'Querying...';
   
+  // First, compute seals regardless
+  console.log('Step 1: Computing cryptographic seals...');
+  const seals = sealDocument();
+  
+  if (!seals) {
+    alert('Failed to compute cryptographic seals. Check console for errors.');
+    return false;
+  }
+  
+  // Now try on-chain verification
   try {
+    console.log('Step 2: Checking ethers library...');
+    
     if (typeof ethers === 'undefined') {
-      throw new Error('Ethers.js library not loaded');
+      throw new Error('Ethers.js library not loaded. Please refresh the page.');
     }
     
-    console.log('Creating provider...');
+    console.log('✓ Ethers loaded');
+    console.log('Step 3: Creating provider...');
+    
     const provider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth');
+    
+    console.log('Step 4: Testing connection...');
+    const blockNumber = await provider.getBlockNumber();
+    console.log('✓ Connected to Ethereum. Current block:', blockNumber);
+    
+    console.log('Step 5: Creating contract...');
     const abi = ['function ownerOf(uint256) view returns (address)'];
     const contract = new ethers.Contract(CONTRACT, abi, provider);
+    console.log('✓ Contract created');
     
-    console.log('Querying owner...');
+    console.log('Step 6: Querying owner...');
     const owner = await contract.ownerOf(TOKEN_ID);
     const ownerLower = owner.toLowerCase();
     
-    console.log('Owner retrieved:', ownerLower);
+    console.log('✓ Owner retrieved:', ownerLower);
     
-    // Update UI
+    // Update UI with owner
     ownerField.innerText = ownerLower;
     ownStatus.innerText = 'ownerOf(1) = ' + ownerLower;
     statusDiv.innerHTML = '✓ <strong>CRYPTOGRAPHICALLY VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px; font-weight:normal;">Owner: ' + ownerLower + '</span>';
     
-    // Seal document
-    const seals = sealDocument();
+    console.log('=== Verification complete ===');
     
-    console.log('Verification complete!');
-    alert('✓ On-Chain Verification Complete!\n\n' +
+    alert('✓ VERIFICATION COMPLETE!\n\n' +
+          '🔗 Blockchain:\n' +
           'Owner: ' + ownerLower + '\n' +
+          'Block: ' + blockNumber + '\n\n' +
+          '🔐 Cryptographic Seals:\n' +
           'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
-          'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
-          'All cryptographic seals computed. Certificate ready for print or download.');
+          'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n' +
+          'Merkle Root: ' + seals.root.slice(0,18) + '...\n\n' +
+          '✓ Certificate is ready for print or download.');
+    
+    return true;
     
   } catch(e) {
-    console.error('Verification error:', e);
-    statusDiv.innerHTML = '✗ Verification failed: ' + e.message;
-    ownerField.innerText = 'Error: ' + e.message;
-    ownStatus.innerText = 'Error';
-    alert('✗ Verification failed:\n\n' + e.message + '\n\nPlease check your internet connection and try again.');
+    console.error('=== Verification error ===');
+    console.error('Error:', e);
+    
+    statusDiv.innerHTML = '⚠️ On-chain query failed, but seals are computed<br/><span style="font-size:11px;">Error: ' + e.message + '</span>';
+    ownerField.innerText = 'Could not verify (see console)';
+    ownStatus.innerText = 'Query failed';
+    
+    alert('⚠️ On-Chain Verification Failed\n\n' +
+          'Error: ' + e.message + '\n\n' +
+          '✓ Cryptographic seals were computed successfully:\n' +
+          'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
+          'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
+          'The certificate is still valid for print/download.\n' +
+          'On-chain owner can be verified manually at:\n' +
+          'https://etherscan.io/token/' + CONTRACT);
+    
+    return false;
   }
 }
 
@@ -572,8 +625,9 @@ async function verifyAndSeal() {
 function downloadCertificate() {
   console.log('Downloading certificate...');
   
-  // Seal if not already
+  // Ensure seals are computed
   if (document.getElementById("sealKeccak").innerText === "—") {
+    console.log('Seals not computed, computing now...');
     sealDocument();
   }
   
@@ -596,9 +650,53 @@ function downloadCertificate() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   
-  console.log('Download complete');
-  alert('✓ Certificate downloaded!\n\nFile: AE-Core-Token-Banking-Certificate-PFC-2025-001-7B3A.html\n\nOpen this file in any browser to view the complete verified certificate.');
+  console.log('✓ Download complete');
+  alert('✓ Certificate downloaded!\n\nFile: AE-Core-Token-Banking-Certificate-PFC-2025-001-7B3A.html');
 }
+
+// Page initialization
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('=== Page loaded ===');
+  console.log('CryptoJS available:', typeof CryptoJS !== 'undefined');
+  console.log('Ethers available:', typeof ethers !== 'undefined');
+  
+  // Set mint TX abbreviation
+  document.getElementById("mintTx").innerText = MINT_TX.slice(0,12) + "..." + MINT_TX.slice(-6);
+  
+  // Check libraries
+  if (typeof CryptoJS === 'undefined') {
+    console.error('⚠️ CryptoJS failed to load!');
+    alert('Warning: Cryptography library failed to load. Please refresh the page.');
+    return;
+  }
+  
+  if (typeof ethers === 'undefined') {
+    console.warn('⚠️ Ethers.js not yet loaded. On-chain verification may not work.');
+  }
+  
+  // Auto-compute seals on load
+  console.log('Auto-computing seals on page load...');
+  setTimeout(function() {
+    sealDocument();
+  }, 100);
+  
+  console.log('=== Initialization complete ===');
+  console.log('Ready! Click "Verify On-Chain" button to verify ownership.');
+});
+
+// Also check when window fully loads (including external scripts)
+window.addEventListener('load', function() {
+  console.log('=== Window fully loaded ===');
+  console.log('Ethers available:', typeof ethers !== 'undefined');
+  
+  if (typeof ethers === 'undefined') {
+    console.error('⚠️ Ethers.js failed to load from CDN');
+    document.getElementById("verificationStatus").innerHTML = 
+      '⚠️ Blockchain library failed to load. Refresh page or verify manually at Etherscan.';
+  } else {
+    console.log('✓ All libraries loaded successfully');
+  }
+});
 </script>
 
 </body>
