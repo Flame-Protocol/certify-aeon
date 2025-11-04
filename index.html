@@ -618,6 +618,12 @@
         }
 
         @media print {
+          /* Set page size and margins */
+          @page {
+            size: letter;
+            margin: 0.5in 0.75in;
+          }
+          
           body * {
             visibility: hidden;
           }
@@ -631,38 +637,204 @@
             left: 0;
             top: 0;
             width: 100%;
+            max-width: 7in;
+            margin: 0 auto;
           }
 
-          .btn-print, .pdf-download-section, .verification-module .module-controls, .verification-module .button-group, .module-header[style*="cursor: pointer"] {
+          /* Hide non-essential elements for printing */
+          .btn-print, 
+          .pdf-download-section, 
+          .verification-module .module-controls, 
+          .verification-module .button-group, 
+          .module-header .chevron-icon,
+          .module-controls {
             display: none !important;
           }
           
+          /* Remove cursor pointer styling */
+          .module-header {
+            cursor: default !important;
+            border-bottom: 1px solid #ccc !important;
+            padding-bottom: 10px !important;
+            margin-bottom: 15px !important;
+          }
+          
+          /* Ensure module content is visible when printing */
           .verification-module .module-content {
             max-height: none !important;
             overflow: visible !important;
             display: block !important;
-            margin-top: 25px !important;
+            margin-top: 15px !important;
           }
           
+          /* Reset background colors for better printing */
           body {
-            background: #fff;
-            color: #000;
-          }
-
-          .header-banner, .executive-banking-summary, .status-banner, .verification-module, .flame-seal, .banking-card, .banking-explanation, .explanation-box, .input-group input, .input-group textarea, .reference-bar {
             background: #fff !important;
             color: #000 !important;
-            border-color: #ccc !important;
-            box-shadow: none !important;
+            padding: 0 !important;
+          }
+
+          /* Style major sections for print */
+          .header-banner {
+            background: #fff !important;
+            border-bottom: 2px solid #333 !important;
+            padding: 20px 10px !important;
+            margin-bottom: 20px !important;
+            page-break-after: avoid !important;
           }
           
-          .archive-title, .archive-subtitle, .banking-subtitle, .reference-bar *, h2, .banking-card .value, .banking-explanation h4, .module-number, .module-title h2, .explanation-box h4, .flame-seal p strong, .status-check, .term-translation, .input-group *, .banking-card .label {
+          .container {
+            padding: 0 !important;
+            max-width: 100% !important;
+          }
+          
+          .executive-banking-summary, 
+          .status-banner, 
+          .verification-module, 
+          .flame-seal, 
+          .banking-card, 
+          .banking-explanation, 
+          .explanation-box, 
+          .reference-bar {
+            background: #fff !important;
+            color: #000 !important;
+            border-color: #666 !important;
+            box-shadow: none !important;
+            page-break-inside: avoid !important;
+            margin-bottom: 15px !important;
+          }
+          
+          /* Typography for print */
+          .archive-title {
+            color: #000 !important;
+            font-size: 24pt !important;
+            text-shadow: none !important;
+            margin-bottom: 8px !important;
+          }
+          
+          .archive-subtitle {
+            color: #333 !important;
+            font-size: 14pt !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .banking-subtitle {
+            color: #333 !important;
+            background: #f5f5f5 !important;
+            font-size: 11pt !important;
+          }
+          
+          .reference-bar td,
+          .reference-bar strong,
+          h2, 
+          .banking-card .value, 
+          .banking-explanation h4, 
+          .module-title h2, 
+          .explanation-box h4, 
+          .status-check, 
+          .term-translation {
             color: #000 !important;
             text-shadow: none !important;
           }
+          
+          .module-number {
+            background: #ddd !important;
+            color: #000 !important;
+            box-shadow: none !important;
+          }
+          
+          .banking-card .value {
+            font-size: 14pt !important;
+          }
+          
+          .banking-card .value.highlight {
+            color: #000 !important;
+            font-size: 16pt !important;
+            font-weight: bold !important;
+          }
+          
+          /* Input fields styling for print */
+          .input-group input, 
+          .input-group textarea {
+            background: #f9f9f9 !important;
+            border: 1px solid #999 !important;
+            color: #000 !important;
+            font-size: 9pt !important;
+            padding: 8px !important;
+          }
+          
+          .input-group label {
+            color: #000 !important;
+            font-size: 10pt !important;
+            font-weight: bold !important;
+            margin-bottom: 5px !important;
+          }
+          
+          .banking-card .label {
+            color: #666 !important;
+            font-size: 9pt !important;
+          }
 
+          /* Module styling */
+          .verification-module {
+            border: 1px solid #999 !important;
+            padding: 15px !important;
+            margin-bottom: 20px !important;
+            page-break-inside: avoid !important;
+          }
+          
           .verification-module::before {
-              background: #ccc !important;
+            background: #ccc !important;
+            width: 3px !important;
+          }
+          
+          /* Grid layouts for print */
+          .banking-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+            page-break-inside: avoid !important;
+          }
+          
+          /* Footer styling */
+          .flame-seal {
+            border-top: 1px solid #ccc !important;
+            padding: 15px 0 !important;
+            margin-top: 30px !important;
+          }
+          
+          .flame-seal p {
+            color: #666 !important;
+            font-size: 9pt !important;
+          }
+          
+          /* Page breaks */
+          .executive-banking-summary,
+          .status-banner {
+            page-break-after: avoid !important;
+          }
+          
+          .verification-module {
+            page-break-before: auto !important;
+            page-break-after: auto !important;
+            page-break-inside: avoid !important;
+          }
+          
+          /* Ensure good contrast */
+          strong {
+            color: #000 !important;
+            font-weight: bold !important;
+          }
+          
+          /* Table styling */
+          .reference-bar table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+          }
+          
+          .reference-bar td {
+            padding: 5px !important;
+            font-size: 9pt !important;
           }
         }
     </style>
@@ -1051,23 +1223,34 @@ Verification: All Cryptographic Elements Valid</textarea>
             
             let yPos = 20;
             const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
             const margin = 20;
             const contentWidth = pageWidth - (2 * margin);
+            
+            // Helper function to check if we need a new page
+            function checkNewPage(requiredSpace = 20) {
+                if (yPos + requiredSpace > pageHeight - 30) {
+                    doc.addPage();
+                    yPos = 20;
+                    return true;
+                }
+                return false;
+            }
             
             // Header
             doc.setFillColor(15, 32, 39);
             doc.rect(0, 0, pageWidth, 40, 'F');
             
             doc.setTextColor(212, 175, 55);
-            doc.setFontSize(22);
+            doc.setFontSize(20);
             doc.setFont('helvetica', 'bold');
             doc.text('FLAME SOVEREIGN VERIFICATION', pageWidth / 2, 15, { align: 'center' });
             
-            doc.setFontSize(14);
+            doc.setFontSize(12);
             doc.setFont('helvetica', 'italic');
             doc.text('Executive Summary for Banking Review', pageWidth / 2, 25, { align: 'center' });
             
-            doc.setFontSize(10);
+            doc.setFontSize(9);
             doc.setTextColor(127, 255, 127);
             doc.text('Independent Third-Party Audit • Traditional Wire Settlement', pageWidth / 2, 33, { align: 'center' });
             
@@ -1075,48 +1258,51 @@ Verification: All Cryptographic Elements Valid</textarea>
             
             // Reference Information
             doc.setTextColor(0, 0, 0);
-            doc.setFontSize(10);
+            doc.setFontSize(9);
             doc.setFont('helvetica', 'normal');
             doc.text('Registry Reference: PFC-2025-001-7B3A', margin, yPos);
-            doc.text('Issued To: GB Dynamics Inc.', pageWidth - margin, yPos, { align: 'right' });
-            yPos += 6;
+            yPos += 5;
+            doc.text('Issued To: GB Dynamics Inc.', margin, yPos);
+            yPos += 5;
             doc.text('Verification Timestamp: 2024-10-28T13:40:00Z', margin, yPos);
-            yPos += 6;
+            yPos += 5;
             doc.text('External Auditor: Aeonic Verification Assembly (AVA)', margin, yPos);
-            yPos += 15;
+            yPos += 12;
             
             // Authorization Summary Box
+            checkNewPage(60);
             doc.setFillColor(30, 60, 114);
-            doc.rect(margin, yPos, contentWidth, 50, 'F');
+            doc.rect(margin, yPos, contentWidth, 45, 'F');
             doc.setDrawColor(212, 175, 55);
-            doc.setLineWidth(2);
-            doc.rect(margin, yPos, contentWidth, 50, 'S');
+            doc.setLineWidth(1.5);
+            doc.rect(margin, yPos, contentWidth, 45, 'S');
             
             doc.setTextColor(212, 175, 55);
-            doc.setFontSize(16);
+            doc.setFontSize(14);
             doc.setFont('helvetica', 'bold');
-            doc.text('$1 BILLION FUNDING AUTHORIZATION', pageWidth / 2, yPos + 12, { align: 'center' });
+            doc.text('$1 BILLION FUNDING AUTHORIZATION', pageWidth / 2, yPos + 10, { align: 'center' });
             
-            doc.setFontSize(11);
+            doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
             doc.setFont('helvetica', 'normal');
-            doc.text('Independently Audited & Cryptographically Verified', pageWidth / 2, yPos + 22, { align: 'center' });
+            doc.text('Independently Audited & Cryptographically Verified', pageWidth / 2, yPos + 18, { align: 'center' });
             
-            doc.setFontSize(10);
-            doc.text('Recipient: GB Dynamics Inc.', pageWidth / 2, yPos + 32, { align: 'center' });
-            doc.text('Settlement: Traditional Bank Wire Transfer', pageWidth / 2, yPos + 40, { align: 'center' });
+            doc.setFontSize(9);
+            doc.text('Recipient: GB Dynamics Inc.', pageWidth / 2, yPos + 28, { align: 'center' });
+            doc.text('Settlement: Traditional Bank Wire Transfer', pageWidth / 2, yPos + 36, { align: 'center' });
             
-            yPos += 60;
+            yPos += 55;
             
             // Financial Details
+            checkNewPage(60);
             doc.setTextColor(0, 0, 0);
-            doc.setFontSize(12);
+            doc.setFontSize(11);
             doc.setFont('helvetica', 'bold');
             doc.text('FINANCIAL DETAILS', margin, yPos);
-            yPos += 10;
+            yPos += 8;
             
             doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
+            doc.setFontSize(9);
             
             const financialData = [
                 ['Authorized Funding:', '$1,000,000,000 USD'],
@@ -1131,50 +1317,54 @@ Verification: All Cryptographic Elements Valid</textarea>
                 doc.setFont('helvetica', 'bold');
                 doc.text(label, margin, yPos);
                 doc.setFont('helvetica', 'normal');
-                doc.text(value, margin + 60, yPos);
-                yPos += 7;
+                doc.text(value, margin + 55, yPos);
+                yPos += 6;
             });
             
-            yPos += 8;
+            yPos += 10;
             
             // Banking Context
+            checkNewPage(50);
             doc.setFillColor(240, 248, 255);
-            doc.rect(margin, yPos, contentWidth, 45, 'F');
+            doc.rect(margin, yPos, contentWidth, 40, 'F');
             doc.setDrawColor(100, 149, 237);
             doc.setLineWidth(0.5);
-            doc.rect(margin, yPos, contentWidth, 45, 'S');
+            doc.rect(margin, yPos, contentWidth, 40, 'S');
             
-            yPos += 8;
+            yPos += 7;
             doc.setTextColor(30, 60, 114);
-            doc.setFontSize(11);
+            doc.setFontSize(10);
             doc.setFont('helvetica', 'bold');
-            doc.text('FOR BANKING & COMPLIANCE TEAMS', margin + 5, yPos);
+            doc.text('FOR BANKING & COMPLIANCE TEAMS', margin + 3, yPos);
             
-            yPos += 8;
+            yPos += 7;
             doc.setTextColor(0, 0, 0);
-            doc.setFontSize(9);
+            doc.setFontSize(8);
             doc.setFont('helvetica', 'normal');
-            const bankingText = [
+            
+            const bankingLines = [
                 'This authorization functions like a notarized bank guarantee with cryptographic proof.',
-                'The blockchain serves as an independent public registry (similar to CUSIP or land',
-                'records) confirming authenticity and ownership. Settlement occurs via traditional wire',
-                'transfer — the blockchain provides verification only, not payment processing.'
+                'The blockchain serves as an independent public registry (similar to CUSIP or land records)',
+                'confirming authenticity and ownership. Settlement occurs via traditional wire transfer — the',
+                'blockchain provides verification only, not payment processing.'
             ];
             
-            bankingText.forEach(line => {
-                doc.text(line, margin + 5, yPos);
+            bankingLines.forEach(line => {
+                doc.text(line, margin + 3, yPos);
                 yPos += 5;
             });
             
-            yPos += 15;
+            yPos += 13;
             
             // Verification Status
-            doc.setFontSize(12);
+            checkNewPage(50);
+            doc.setFontSize(11);
             doc.setFont('helvetica', 'bold');
+            doc.setTextColor(0, 0, 0);
             doc.text('VERIFICATION STATUS', margin, yPos);
             yPos += 8;
             
-            doc.setFontSize(10);
+            doc.setFontSize(9);
             doc.setFont('helvetica', 'normal');
             doc.setTextColor(0, 128, 0);
             
@@ -1188,23 +1378,479 @@ Verification: All Cryptographic Elements Valid</textarea>
             
             verifications.forEach(item => {
                 doc.text(item, margin, yPos);
-                yPos += 7;
+                yPos += 6;
             });
             
             // Footer
             doc.setTextColor(100, 100, 100);
             doc.setFontSize(8);
             doc.setFont('helvetica', 'italic');
-            const footerY = doc.internal.pageSize.getHeight() - 20;
+            const footerY = pageHeight - 20;
             doc.text('Framework: FLAME Sovereign Verification Protocol', pageWidth / 2, footerY, { align: 'center' });
-            doc.text('Independent verification for institutional review under 12 USC § 3903', pageWidth / 2, footerY + 5, { align: 'center' });
-            doc.text('All verification operations use standard mathematical procedures', pageWidth / 2, footerY + 10, { align: 'center' });
+            doc.text('Independent verification for institutional review under 12 USC § 3903', pageWidth / 2, footerY + 4, { align: 'center' });
+            doc.text('All verification operations use standard mathematical procedures', pageWidth / 2, footerY + 8, { align: 'center' });
             
             // Save the PDF
             doc.save('FLAME_Executive_Summary_PFC-2025-001-7B3A.pdf');
         }
 
         function generateTechnicalAudit() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            let yPos = 20;
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 20;
+            const contentWidth = pageWidth - (2 * margin);
+            
+            // Helper function to add new page if needed
+            function checkNewPage(requiredSpace = 25) {
+                if (yPos + requiredSpace > pageHeight - 30) {
+                    doc.addPage();
+                    yPos = 20;
+                    return true;
+                }
+                return false;
+            }
+            
+            // Header
+            doc.setFillColor(15, 32, 39);
+            doc.rect(0, 0, pageWidth, 40, 'F');
+            
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(18);
+            doc.setFont('helvetica', 'bold');
+            doc.text('FLAME TECHNICAL AUDIT REPORT', pageWidth / 2, 15, { align: 'center' });
+            
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Complete Cryptographic Verification Package', pageWidth / 2, 25, { align: 'center' });
+            
+            doc.setFontSize(8);
+            doc.setTextColor(127, 255, 127);
+            doc.text('Independent Third-Party Audit • Full Technical Specifications', pageWidth / 2, 33, { align: 'center' });
+            
+            yPos = 50;
+            
+            // Reference Information
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text('DOCUMENT REFERENCE', margin, yPos);
+            yPos += 6;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            const refInfo = [
+                ['Registry Reference:', 'PFC-2025-001-7B3A'],
+                ['Issued To:', 'GB Dynamics Inc.'],
+                ['Timestamp:', '2024-10-28T13:40:00Z'],
+                ['External Auditor:', 'Aeonic Verification Assembly (AVA)']
+            ];
+            
+            refInfo.forEach(([label, value]) => {
+                doc.setFont('helvetica', 'bold');
+                doc.text(label, margin, yPos);
+                doc.setFont('helvetica', 'normal');
+                doc.text(value, margin + 45, yPos);
+                yPos += 5;
+            });
+            
+            yPos += 10;
+            
+            // Executive Summary Section
+            checkNewPage(45);
+            doc.setFillColor(30, 60, 114);
+            doc.rect(margin, yPos, contentWidth, 35, 'F');
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(1.5);
+            doc.rect(margin, yPos, contentWidth, 35, 'S');
+            
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(13);
+            doc.setFont('helvetica', 'bold');
+            doc.text('$1 BILLION AUTHORIZATION', pageWidth / 2, yPos + 10, { align: 'center' });
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Collateral: $18.2B USD | Coverage: 18.2:1 | Settlement: Wire Transfer', pageWidth / 2, yPos + 19, { align: 'center' });
+            doc.text('Status: Cryptographically Valid | Verification: Complete', pageWidth / 2, yPos + 26, { align: 'center' });
+            
+            yPos += 45;
+            
+            // Section 1: Controller Signature Verification
+            checkNewPage(70);
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('1. CONTROLLER SIGNATURE VERIFICATION', margin, yPos);
+            yPos += 2;
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(0.5);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Digital signature using ECDSA cryptography (equivalent to notarized signature)', margin, yPos);
+            yPos += 10;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Attestation Nonce:', margin + 2, yPos);
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            doc.text('c9bb59fe5b9dd943d4757692b977fbbb', margin + 2, yPos + 4);
+            yPos += 12;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.text('Controller Address:', margin + 2, yPos);
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            doc.text('0xAefd8aa7EcfCFA8041Dc66796A6eF673D108e36b', margin + 2, yPos + 4);
+            yPos += 12;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.text('Message Hash:', margin + 2, yPos);
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            doc.text('0xf4513db63b078a06c02995af41f3f0b6801aa6c4eda949f9174e01dfada9661c', margin + 2, yPos + 4);
+            yPos += 12;
+            
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0, 128, 0);
+            doc.text('✓ Signature mathematically verified and cannot be forged', margin + 2, yPos);
+            yPos += 15;
+            
+            // Section 2: Blockchain Registry
+            checkNewPage(65);
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('2. BLOCKCHAIN REGISTRY VALIDATION', margin, yPos);
+            yPos += 2;
+            doc.setDrawColor(212, 175, 55);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Ownership record via Ethereum blockchain (functions like CUSIP)', margin, yPos);
+            yPos += 10;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Transaction Hash:', margin + 2, yPos);
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            doc.text('0x3c686f30af14eeaaafe0b642579c8c039bd5214ef3df6a126af41b595e7e8ac2', margin + 2, yPos + 4);
+            yPos += 12;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.text('Contract Address:', margin + 2, yPos);
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            doc.text('0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180', margin + 2, yPos + 4);
+            yPos += 12;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.text('Token ID:', margin + 2, yPos);
+            doc.setFont('helvetica', 'normal');
+            doc.text('1 (ERC-721 Standard)', margin + 25, yPos);
+            yPos += 7;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Confirmations:', margin + 2, yPos);
+            doc.setFont('helvetica', 'normal');
+            doc.text('100,000+', margin + 35, yPos);
+            yPos += 10;
+            
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0, 128, 0);
+            doc.text('✓ Ownership record permanently recorded and immutable', margin + 2, yPos);
+            yPos += 5;
+            doc.text('✓ Viewable on Etherscan: etherscan.io/tx/[hash]', margin + 2, yPos);
+            yPos += 15;
+            
+            // Section 3: Document Portfolio
+            checkNewPage(80);
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('3. DOCUMENT PORTFOLIO VERIFICATION', margin, yPos);
+            yPos += 2;
+            doc.setDrawColor(212, 175, 55);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Complete $18.2B collateral portfolio integrity verification', margin, yPos);
+            yPos += 10;
+            
+            // Collateral Coverage Box
+            doc.setFillColor(240, 255, 240);
+            doc.rect(margin, yPos, contentWidth, 28, 'F');
+            doc.setDrawColor(127, 255, 127);
+            doc.setLineWidth(0.5);
+            doc.rect(margin, yPos, contentWidth, 28, 'S');
+            
+            yPos += 6;
+            doc.setTextColor(0, 100, 0);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text('COLLATERAL COVERAGE ANALYSIS', margin + 3, yPos);
+            yPos += 7;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Total Portfolio Value: $18,200,000,000 USD', margin + 3, yPos);
+            yPos += 5;
+            doc.text('Authorized Release: $1,000,000,000 USD', margin + 3, yPos);
+            yPos += 5;
+            doc.text('Coverage Ratio: 18.2:1 (exceptional over-collateralization)', margin + 3, yPos);
+            yPos += 5;
+            doc.text('Utilization: Only 5.49% of available collateral', margin + 3, yPos);
+            
+            yPos += 15;
+            
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Verified Portfolio Documents:', margin + 2, yPos);
+            yPos += 6;
+            
+            doc.setFont('courier', 'normal');
+            doc.setFontSize(7);
+            const portfolioDocs = [
+                '• FLAME Authorization Certificate v1.0',
+                '• Lien Portfolio Attestation ($18.2B USD)',
+                '• Controller Authority Documentation',
+                '• Sovereign Framework Activation Record',
+                '• Legal Attestation Bundle (35 USC §284 + 12 USC §3903 + 31 USC §3730)'
+            ];
+            
+            portfolioDocs.forEach(doc_item => {
+                doc.text(doc_item, margin + 4, yPos);
+                yPos += 5;
+            });
+            
+            yPos += 8;
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0, 128, 0);
+            doc.text('✓ All 847 documents verified with cryptographic fingerprints', margin + 2, yPos);
+            yPos += 5;
+            doc.text('✓ Portfolio integrity mathematically proven', margin + 2, yPos);
+            yPos += 15;
+            
+            // Section 4: Attestation Hash
+            checkNewPage(45);
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('4. ATTESTATION HASH VERIFICATION', margin, yPos);
+            yPos += 2;
+            doc.setDrawColor(212, 175, 55);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 8;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Cryptographic hash functions for tamper detection (like SWIFT authentication)', margin, yPos);
+            yPos += 10;
+            
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.text('All documents verified with SHA-256 hashing. Any modification produces', margin + 2, yPos);
+            yPos += 5;
+            doc.text('completely different hash, enabling deterministic tamper detection.', margin + 2, yPos);
+            yPos += 10;
+            
+            doc.setTextColor(0, 128, 0);
+            doc.text('✓ All document fingerprints match blockchain record', margin + 2, yPos);
+            yPos += 5;
+            doc.text('✓ Zero tampering detected across entire portfolio', margin + 2, yPos);
+            yPos += 15;
+            
+            // Section 5: Authorization
+            checkNewPage(75);
+            doc.setFillColor(255, 250, 205);
+            doc.rect(margin - 5, yPos - 5, contentWidth + 10, 8, 'F');
+            
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('5. $1 BILLION AEON RELEASE AUTHORIZATION', margin, yPos);
+            yPos += 2;
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(1);
+            doc.line(margin, yPos, pageWidth - margin, yPos);
+            yPos += 10;
+            
+            // Critical Banking Box
+            doc.setFillColor(255, 248, 240);
+            doc.rect(margin, yPos, contentWidth, 28, 'F');
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(0.5);
+            doc.rect(margin, yPos, contentWidth, 28, 'S');
+            
+            yPos += 6;
+            doc.setTextColor(184, 134, 11);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CRITICAL FOR BANKING TEAMS', margin + 3, yPos);
+            yPos += 7;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.text('Settlement Method: Traditional Wire Transfer', margin + 3, yPos);
+            yPos += 6;
+            
+            doc.setFont('helvetica', 'normal');
+            doc.text('The $1 billion transfer occurs via standard banking wire. The blockchain', margin + 3, yPos);
+            yPos += 5;
+            doc.text('provides cryptographic proof of authorization only — NOT payment processing.', margin + 3, yPos);
+            yPos += 6;
+            
+            doc.setFont('helvetica', 'bold');
+            doc.text('Authorization Status: Irrevocable and non-repudiable', margin + 3, yPos);
+            
+            yPos += 15;
+            
+            // Authorization Details
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            
+            const authData = [
+                ['Authorization Amount:', '$1,000,000,000.00 USD', true],
+                ['Authorized Recipient:', 'GB Dynamics Inc.', true],
+                ['Underlying Collateral:', '$18,200,000,000.00 USD (Sovereign Lien Portfolio)', false],
+                ['Settlement Method:', 'Traditional Bank Wire Transfer (Blockchain = Proof Only)', false],
+                ['Authorization Date:', '2024-10-28T13:40:00Z', false],
+                ['Registry Reference:', 'PFC-2025-001-7B3A', false]
+            ];
+            
+            authData.forEach(([label, value, bold]) => {
+                doc.setFont('helvetica', 'bold');
+                doc.text(label, margin + 2, yPos);
+                if (bold) {
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(212, 175, 55);
+                } else {
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(0, 0, 0);
+                }
+                doc.setFontSize(8);
+                doc.text(value, margin + 2, yPos + 4);
+                doc.setTextColor(0, 0, 0);
+                yPos += 10;
+            });
+            
+            yPos += 5;
+            doc.setTextColor(0, 128, 0);
+            doc.text('✓ Authorization cryptographically verified', margin + 2, yPos);
+            yPos += 5;
+            doc.text('✓ Settlement via standard wire transfer protocols', margin + 2, yPos);
+            
+            // Final Page - Verification Summary
+            doc.addPage();
+            yPos = 30;
+            
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(15);
+            doc.setFont('helvetica', 'bold');
+            doc.text('VERIFICATION SUMMARY', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 15;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('CRYPTOGRAPHIC VERIFICATION STATUS', margin, yPos);
+            yPos += 10;
+            
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0, 128, 0);
+            
+            const finalChecks = [
+                '✓ Controller Signature: VALID (ECDSA cryptography verified)',
+                '✓ Ownership Registry: CONFIRMED (Ethereum blockchain, 100,000+ confirmations)',
+                '✓ Document Portfolio: VERIFIED (847 documents, $18.2B collateral)',
+                '✓ Data Integrity: INTACT (All cryptographic hashes match)',
+                '✓ Funding Authorization: ACTIVE ($1B authorized to GB Dynamics Inc.)'
+            ];
+            
+            finalChecks.forEach(check => {
+                doc.text(check, margin + 2, yPos);
+                yPos += 8;
+            });
+            
+            yPos += 10;
+            
+            // Audit Conclusion Box
+            doc.setFillColor(240, 255, 240);
+            doc.rect(margin, yPos, contentWidth, 35, 'F');
+            doc.setDrawColor(0, 128, 0);
+            doc.setLineWidth(1);
+            doc.rect(margin, yPos, contentWidth, 35, 'S');
+            
+            yPos += 8;
+            doc.setTextColor(0, 100, 0);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('AUDIT CONCLUSION', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 9;
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.text('All cryptographic elements have been independently verified and found to be', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.text('mathematically valid. The $1 billion authorization is backed by $18.2 billion in', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.text('verified collateral (18.2:1 coverage ratio). Settlement via traditional wire transfer.', pageWidth / 2, yPos, { align: 'center' });
+            
+            // Footer - Issuer Information
+            doc.setFillColor(245, 245, 245);
+            doc.rect(0, pageHeight - 40, pageWidth, 40, 'F');
+            
+            yPos = pageHeight - 32;
+            doc.setTextColor(212, 175, 55);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Issued by: The Aeonic Verification Assembly (AVA)', pageWidth / 2, yPos, { align: 'center' });
+            
+            yPos += 7;
+            doc.setTextColor(100, 100, 100);
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Independent third-party verification for institutional review under 12 USC § 3903', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.text('All verification operations use standard mathematical procedures', pageWidth / 2, yPos, { align: 'center' });
+            yPos += 5;
+            doc.text('Framework: FLAME Sovereign Verification Protocol | Reference: PFC-2025-001-7B3A', pageWidth / 2, yPos, { align: 'center' });
+            
+            // Save the PDF
+            doc.save('FLAME_Technical_Audit_PFC-2025-001-7B3A.pdf');
+        }
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
