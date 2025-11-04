@@ -126,8 +126,8 @@
     background:#fafbfd; border-radius:4px; padding:7px 9px;
   }
   .collateral-label{font-size:9.5px; color:#555; margin-bottom:2px;}
-  .collateral-value{font-size:14px; font-weight:bold; color:#059669;}
-  .ceo-line{color:#7fff7f; margin-top:4px; font-style:italic; font-size:11px;}
+  .collateral-value{font-size:14px; font-weight:bold; color:#d4af37;}
+  .ceo-line{color:#d4af37; margin-top:4px; font-style:normal; font-size:11.5px; font-weight:600;}
 
   /* Verification Status */
   .verification-status{
@@ -185,6 +185,10 @@
       font-size:10px;
     }
     
+    /* Show verification URL instead of button instruction when printing */
+    .screen-only{display:none !important;}
+    .print-only{display:inline !important;}
+    
     /* Prevent page breaks */
     .exec-summary, .facts, .banking-table, .collateral-box,
     .verification-status, .notary, .sigs, .card{
@@ -197,6 +201,10 @@
     .verification-status, .notary{margin:3mm 0;}
     .title{margin:3mm 0 2mm 0;}
   }
+  
+  /* Hide print-only on screen */
+  .print-only{display:none;}
+  .screen-only{display:inline;}
 
   /* Responsive */
   @media(max-width:768px){
@@ -301,7 +309,12 @@
         </tr>
         <tr>
           <td>Certificate Holder</td>
-          <td class="mono"><span id="liveOwner">Pending verification</span></td>
+          <td class="mono">
+            <span id="liveOwner" style="color:#d4af37; font-weight:600;">
+              <span class="screen-only">Click "Verify On-Chain" button above</span>
+              <span class="print-only" id="printOwner">Jonathan Granger, CEO</span>
+            </span>
+          </td>
           <td>Live ownerOf() query</td>
         </tr>
         <tr>
@@ -382,7 +395,7 @@
       <div>SHA-256 Seal</div><div id="sealSha256">—</div>
       <div>Keccak-256 Seal</div><div id="sealKeccak">—</div>
       <div>Timestamp (UTC)</div><div id="sealTimestamp">—</div>
-      <div>Live Ownership</div><div id="ownStatus">Pending</div>
+      <div>Live Ownership</div><div id="ownStatus" style="color:#d4af37; font-weight:600;">Click "Verify On-Chain" to query</div>
     </div>
     <div class="note" style="margin-top:5px;">
       This seal hashes the certificate. Any alteration changes digests. All data independently verifiable on Ethereum blockchain.
@@ -420,6 +433,7 @@
   <div style="text-align:center; margin-top:5mm; padding-top:3mm; border-top:1px solid var(--rule);">
     <p style="font-size:10.5px; color:#555;">
       <strong>Issued by:</strong> Aeonic Verification Assembly (AVA) • Framework: FLAME Sovereign Verification<br/>
+      <strong>Verification Link:</strong> <a href="https://flame-protocol.github.io/certify-aeon/" style="color:#d4af37; text-decoration:none;">https://flame-protocol.github.io/certify-aeon/</a><br/>
       <em style="font-size:10px;">Independent third-party verification • All operations use standard mathematical procedures</em>
     </p>
   </div>
@@ -429,7 +443,7 @@
 <!-- Print footer (hidden on screen) -->
 <div class="print-footer">
   <div class="mono">PFC-2025-001-7B3A • GB Dynamics Inc. — Jonathan Granger, CEO</div>
-  <div class="mono" id="footer-seal">Seal: [Verify to generate]</div>
+  <div class="mono">Verify: flame-protocol.github.io/certify-aeon/</div>
 </div>
 
 <script>
@@ -487,7 +501,6 @@ function sealDocument() {
     document.getElementById("sealKeccak").innerText = "0x" + keccak;
     document.getElementById("sealTimestamp").innerText = timestamp;
     document.getElementById("merkleRoot").innerText = root;
-    document.getElementById("footer-seal").innerText = "Seal: 0x" + keccak.slice(0,12) + "...";
     
     console.log('✓ Seals computed successfully');
     console.log('  SHA-256:', '0x' + sha.slice(0,16) + '...');
@@ -506,6 +519,7 @@ async function verifyAndSeal() {
   
   const statusDiv = document.getElementById("verificationStatus");
   const ownerField = document.getElementById("liveOwner");
+  const printOwner = document.getElementById("printOwner");
   const ownStatus = document.getElementById("ownStatus");
   
   // Step 1: Compute seals first (always works)
@@ -523,7 +537,7 @@ async function verifyAndSeal() {
   // Step 2: Try blockchain verification
   console.log('Step 2: Attempting blockchain connection...');
   statusDiv.innerHTML = '⏳ Connecting to Ethereum mainnet...';
-  ownerField.innerText = 'Querying...';
+  ownerField.innerHTML = '<span class="screen-only">Querying...</span><span class="print-only" id="printOwner">Jonathan Granger, CEO</span>';
   ownStatus.innerText = 'Querying...';
   
   try {
@@ -572,15 +586,21 @@ async function verifyAndSeal() {
     
     console.log('✓ Owner retrieved:', ownerLower);
     
-    // Update UI
-    ownerField.innerText = ownerLower;
-    ownStatus.innerText = 'ownerOf(1) = ' + ownerLower;
-    statusDiv.innerHTML = '✓ <strong>VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px;">Owner: ' + ownerLower + '</span>';
+    // Update UI with both address and name
+    ownerField.style.color = '#d4af37';
+    ownerField.style.fontWeight = '600';
+    ownerField.innerHTML = '<span class="screen-only">' + ownerLower + '<br/>Jonathan Granger, CEO</span><span class="print-only" id="printOwner">' + ownerLower + '<br/>Jonathan Granger, CEO</span>';
+    
+    ownStatus.style.color = '#d4af37';
+    ownStatus.style.fontWeight = '600';
+    ownStatus.innerText = '✓ ownerOf(1) = ' + ownerLower + ' (Jonathan Granger, CEO)';
+    statusDiv.innerHTML = '✓ <strong>VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px;">Owner: ' + ownerLower + ' (Jonathan Granger, CEO)</span>';
     
     console.log('=== Verification Complete ===\n');
     
     alert('✓ VERIFICATION COMPLETE!\n\n' +
-          '🔗 Blockchain Owner:\n' + ownerLower + '\n\n' +
+          '🔗 Blockchain Owner:\n' + ownerLower + '\n' +
+          'Jonathan Granger, CEO\n\n' +
           '🔐 Cryptographic Seals:\n' +
           'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
           'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
@@ -593,7 +613,7 @@ async function verifyAndSeal() {
     console.error('Error:', e.message);
     
     statusDiv.innerHTML = '⚠️ Blockchain query failed (seals computed)<br/><span style="font-size:10.5px;">' + e.message + '</span>';
-    ownerField.innerText = 'Query failed (see console)';
+    ownerField.innerHTML = '<span class="screen-only">Query failed (see console)</span><span class="print-only" id="printOwner">Jonathan Granger, CEO</span>';
     ownStatus.innerText = 'Query failed';
     
     alert('⚠️ On-Chain Verification Failed\n\n' +
