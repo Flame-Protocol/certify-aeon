@@ -189,6 +189,9 @@
     .screen-only{display:none !important;}
     .print-only{display:inline !important;}
     
+    /* Hide interactive verification section in print */
+    .verification-status{display:none !important;}
+    
     /* Prevent page breaks */
     .exec-summary, .facts, .banking-table, .collateral-box,
     .verification-status, .notary, .sigs, .card{
@@ -414,6 +417,29 @@
     </div>
     <div class="note" style="margin-top:5px;">
       <strong>Merkle Root:</strong> <span class="mono" id="merkleRoot">0x[computed]</span>
+    </div>
+  </section>
+
+  <!-- Document Archive Addendum -->
+  <section class="card" style="margin-top:3mm;">
+    <h3>Document Archive & Decentralized Storage</h3>
+    <div style="font-size:11px; line-height:1.5; margin-top:5px;">
+      <div style="margin-bottom:8px;">
+        <strong>ArDrive Permanent Storage:</strong><br/>
+        <a href="https://app.ardrive.io/#/file/5112a2f7-f808-44b1-bef0-8859a9e70f3c/view" style="color:#d4af37; word-break:break-all; font-family:'Courier New',monospace; font-size:10px;">
+          https://app.ardrive.io/#/file/5112a2f7-f808-44b1-bef0-8859a9e70f3c/view
+        </a>
+      </div>
+      <div>
+        <strong>IPFS Content Hash:</strong><br/>
+        <span class="mono" style="font-size:10px; word-break:break-all;">bafybeicynqzfwxhqqp6c4htjpohdjxcahpiv4g3j3qexqesce445txxuhe</span><br/>
+        <a href="https://ipfs.io/ipfs/bafybeicynqzfwxhqqp6c4htjpohdjxcahpiv4g3j3qexqesce445txxuhe" style="color:#d4af37; font-family:'Courier New',monospace; font-size:10px;">
+          https://ipfs.io/ipfs/bafybeicynqzfwxhqqp6c4htjpohdjxcahpiv4g3j3qexqesce445txxuhe
+        </a>
+      </div>
+    </div>
+    <div class="note" style="margin-top:5px;">
+      <strong>Permanence:</strong> Documents permanently archived on Arweave blockchain via ArDrive and IPFS distributed network for immutable, censorship-resistant access.
     </div>
   </section>
 
