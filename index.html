@@ -312,7 +312,7 @@
           <td class="mono">
             <span id="liveOwner" style="color:#d4af37; font-weight:600;">
               <span class="screen-only">Click "Verify On-Chain" button above</span>
-              <span class="print-only" id="printOwner">Jonathan Granger, CEO</span>
+              <span class="print-only" id="printOwner">etherscan.io/token/0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180</span>
             </span>
           </td>
           <td>Live ownerOf() query</td>
@@ -537,7 +537,7 @@ async function verifyAndSeal() {
   // Step 2: Try blockchain verification
   console.log('Step 2: Attempting blockchain connection...');
   statusDiv.innerHTML = '⏳ Connecting to Ethereum mainnet...';
-  ownerField.innerHTML = '<span class="screen-only">Querying...</span><span class="print-only" id="printOwner">Jonathan Granger, CEO</span>';
+  ownerField.innerHTML = '<span class="screen-only">Querying...</span><span class="print-only" id="printOwner">etherscan.io/token/0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180</span>';
   ownStatus.innerText = 'Querying...';
   
   try {
@@ -586,21 +586,20 @@ async function verifyAndSeal() {
     
     console.log('✓ Owner retrieved:', ownerLower);
     
-    // Update UI with both address and name
+    // Update UI with blockchain address only
     ownerField.style.color = '#d4af37';
     ownerField.style.fontWeight = '600';
-    ownerField.innerHTML = '<span class="screen-only">' + ownerLower + '<br/>Jonathan Granger, CEO</span><span class="print-only" id="printOwner">' + ownerLower + '<br/>Jonathan Granger, CEO</span>';
+    ownerField.innerHTML = '<span class="screen-only">' + ownerLower + '</span><span class="print-only">' + ownerLower + '</span>';
     
     ownStatus.style.color = '#d4af37';
     ownStatus.style.fontWeight = '600';
-    ownStatus.innerText = '✓ ownerOf(1) = ' + ownerLower + ' (Jonathan Granger, CEO)';
-    statusDiv.innerHTML = '✓ <strong>VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px;">Owner: ' + ownerLower + ' (Jonathan Granger, CEO)</span>';
+    ownStatus.innerText = '✓ ownerOf(1) = ' + ownerLower;
+    statusDiv.innerHTML = '✓ <strong>VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px;">Owner: ' + ownerLower + '</span>';
     
     console.log('=== Verification Complete ===\n');
     
     alert('✓ VERIFICATION COMPLETE!\n\n' +
-          '🔗 Blockchain Owner:\n' + ownerLower + '\n' +
-          'Jonathan Granger, CEO\n\n' +
+          '🔗 Blockchain Owner:\n' + ownerLower + '\n\n' +
           '🔐 Cryptographic Seals:\n' +
           'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
           'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
@@ -613,7 +612,7 @@ async function verifyAndSeal() {
     console.error('Error:', e.message);
     
     statusDiv.innerHTML = '⚠️ Blockchain query failed (seals computed)<br/><span style="font-size:10.5px;">' + e.message + '</span>';
-    ownerField.innerHTML = '<span class="screen-only">Query failed (see console)</span><span class="print-only" id="printOwner">Jonathan Granger, CEO</span>';
+    ownerField.innerHTML = '<span class="screen-only">Query failed (see console)</span><span class="print-only" id="printOwner">etherscan.io/token/0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180</span>';
     ownStatus.innerText = 'Query failed';
     
     alert('⚠️ On-Chain Verification Failed\n\n' +
