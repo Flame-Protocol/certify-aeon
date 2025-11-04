@@ -43,23 +43,12 @@
   .page{
     width:210mm; margin:20px auto; background:#fff;
     color:var(--ink); position:relative; box-shadow:0 0 10px rgba(0,0,0,.15);
-    padding:20mm 15mm;
+    padding:18mm 15mm;
   }
 
   /* Fixed print header & footer */
   .print-header, .print-footer{
-    position:absolute; left:0; right:0; color:#222; font-size:11px;
-  }
-  .print-header{
-    top:0; height:16mm; background:#fff;
-    border-bottom:1px solid var(--rule);
-    display:flex; align-items:center; justify-content:center; padding:0 15mm;
-  }
-  .print-footer{
-    bottom:0; height:16mm; background:#fff;
-    border-top:1px solid var(--rule);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 15mm;
+    display:none; /* Hidden on screen, shown in print */
   }
 
   .brand{
@@ -74,120 +63,139 @@
   }
 
   /* Certificate heading */
-  .title{text-align:center; margin:6mm 0 5mm 0;}
+  .title{text-align:center; margin:5mm 0 4mm 0;}
   .title h1{
-    font-size:19px; margin:0 0 2mm 0; letter-spacing:.5px; color:#1a2540;
+    font-size:18px; margin:0 0 2mm 0; letter-spacing:.5px; color:#1a2540;
   }
   .title .subtitle{
-    font-size:12.5px; color:#555; font-style:italic;
+    font-size:12px; color:#555; font-style:italic;
   }
-  .hr{height:1px; background:var(--rule); margin:5mm 0}
+  .hr{height:1px; background:var(--rule); margin:4mm 0}
 
   /* Executive Summary */
   .exec-summary{
     border:2px solid var(--gold); border-radius:8px;
-    padding:12px 14px; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    margin:5mm 0;
+    padding:11px 13px; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    margin:4mm 0;
   }
   .exec-summary h3{
-    margin:0 0 8px 0; font-size:14px; color:#92400e; letter-spacing:.3px;
+    margin:0 0 7px 0; font-size:13.5px; color:#92400e; letter-spacing:.3px;
   }
-  .exec-summary p{margin:5px 0; font-size:12.5px; line-height:1.4;}
-  .exec-summary ul{margin:6px 0 0 18px; font-size:12.5px; line-height:1.4;}
+  .exec-summary p{margin:4px 0; font-size:12px; line-height:1.4;}
+  .exec-summary ul{margin:5px 0 0 17px; font-size:12px; line-height:1.4;}
   .exec-summary li{margin-bottom:3px;}
 
   /* Two column facts */
   .facts{display:grid; grid-template-columns:1fr 1fr; gap:4mm;}
   .card{
-    border:1px solid var(--rule); border-radius:6px; padding:10px 11px; background:#fff;
+    border:1px solid var(--rule); border-radius:6px; padding:9px 10px; background:#fff;
   }
   .card h3{
-    margin:0 0 6px 0; font-size:13px; color:#1a2540; letter-spacing:.3px;
+    margin:0 0 6px 0; font-size:12.5px; color:#1a2540; letter-spacing:.3px;
   }
-  .kv{display:grid; grid-template-columns:42% 58%; font-size:12px; row-gap:5px;}
+  .kv{display:grid; grid-template-columns:42% 58%; font-size:11.5px; row-gap:4px;}
   .kv div:nth-child(odd){color:#3b3f47; font-weight:500;}
-  .kv div:nth-child(even){color:#111; word-break:break-all; font-size:11.5px;}
+  .kv div:nth-child(even){color:#111; word-break:break-all; font-size:11px;}
 
   /* Banking Parallels Table */
   .banking-table{
-    border:1px solid var(--rule); border-radius:6px; padding:10px 11px;
+    border:1px solid var(--rule); border-radius:6px; padding:9px 10px;
     background:#fff; margin:4mm 0;
   }
   .banking-table h3{
-    margin:0 0 8px 0; font-size:13px; color:#1a2540; letter-spacing:.3px;
+    margin:0 0 7px 0; font-size:12.5px; color:#1a2540; letter-spacing:.3px;
   }
   table{
-    width:100%; border-collapse:collapse; font-size:11.5px; margin-top:5px;
+    width:100%; border-collapse:collapse; font-size:11px; margin-top:4px;
   }
-  th,td{padding:6px 5px; border-bottom:1px solid var(--rule);}
-  th{background:#fafbfd; text-align:left; color:#1a2540; font-size:11px;}
+  th,td{padding:5px 4px; border-bottom:1px solid var(--rule);}
+  th{background:#fafbfd; text-align:left; color:#1a2540; font-size:10.5px;}
   tr:last-child td{border-bottom:none;}
-  .note{font-size:11.5px; color:#4a4f59; margin-top:5px; line-height:1.3;}
+  .note{font-size:11px; color:#4a4f59; margin-top:4px; line-height:1.3;}
 
   /* Collateral box */
   .collateral-box{
-    border:1px solid var(--rule); border-radius:6px; padding:10px 11px;
+    border:1px solid var(--rule); border-radius:6px; padding:9px 10px;
     background:#fff; margin:4mm 0;
   }
   .collateral-box h3{
-    margin:0 0 8px 0; font-size:13px; color:#1a2540; letter-spacing:.3px;
+    margin:0 0 7px 0; font-size:12.5px; color:#1a2540; letter-spacing:.3px;
   }
-  .collateral-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;}
+  .collateral-grid{display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-bottom:7px;}
   .collateral-item{
-    background:#fafbfd; border-radius:4px; padding:8px 10px;
+    background:#fafbfd; border-radius:4px; padding:7px 9px;
   }
-  .collateral-label{font-size:10px; color:#555; margin-bottom:3px;}
-  .collateral-value{font-size:15px; font-weight:bold; color:#059669;}
+  .collateral-label{font-size:9.5px; color:#555; margin-bottom:2px;}
+  .collateral-value{font-size:14px; font-weight:bold; color:#059669;}
+  .ceo-line{color:#7fff7f; margin-top:4px; font-style:italic; font-size:11px;}
 
   /* Verification Status */
   .verification-status{
     border:2px solid var(--gold); border-radius:6px;
-    padding:10px 12px; margin:4mm 0;
+    padding:9px 11px; margin:4mm 0;
     background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   }
   .verification-status h3{
-    margin:0 0 8px 0; font-size:13px; color:#065f46; letter-spacing:.3px;
+    margin:0 0 7px 0; font-size:12.5px; color:#065f46; letter-spacing:.3px;
   }
-  .status-text{font-size:12px; color:#065f46; font-weight:600;}
+  .status-text{font-size:11.5px; color:#065f46; font-weight:600;}
 
   /* Notary block */
   .notary{
-    border:1px solid var(--rule); border-radius:6px; padding:10px 11px;
+    border:1px solid var(--rule); border-radius:6px; padding:9px 10px;
     background:#fff; margin:4mm 0;
   }
   .notary h3{
-    margin:0 0 8px 0; font-size:13px; color:#1a2540; letter-spacing:.3px;
+    margin:0 0 7px 0; font-size:12.5px; color:#1a2540; letter-spacing:.3px;
   }
   .mono{
-    font-family:"Courier New",monospace; font-size:11px;
+    font-family:"Courier New",monospace; font-size:10.5px;
     word-break:break-all; line-height:1.3;
   }
 
   /* Signatures */
-  .sigs{display:grid; grid-template-columns:1fr 1fr; gap:5mm; margin-top:6mm;}
+  .sigs{display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:5mm;}
   .sig{
-    border-top:1px solid var(--ink); padding-top:3mm; text-align:center; font-size:11.5px;
+    border-top:1px solid var(--ink); padding-top:2.5mm; text-align:center; font-size:11px;
   }
   .gold{color:#8b6b00;}
 
   /* Print rules */
-  @page{size:A4 portrait; margin:0;}
+  @page{size:A4 portrait; margin:15mm;}
   @media print{
     body{background:#fff; margin:0;}
     .toolbar{display:none !important;}
     .page{
-      box-shadow:none; margin:0; padding:18mm 15mm;
-      width:210mm; min-height:297mm;
-      page-break-after:avoid;
+      box-shadow:none; margin:0; padding:15mm 12mm;
+      width:210mm; min-height:auto;
     }
-    .print-header, .print-footer{position:fixed;}
-    a[href]:after{content:"";}
+    .print-header{
+      display:flex !important;
+      justify-content:center; align-items:center;
+      padding:8px 0 10px 0;
+      border-bottom:1px solid var(--rule);
+      margin-bottom:8mm;
+    }
+    .print-footer{
+      display:flex !important;
+      justify-content:space-between; align-items:center;
+      padding:10px 0 8px 0;
+      border-top:1px solid var(--rule);
+      margin-top:8mm;
+      font-size:10px;
+    }
     
-    /* Prevent page breaks inside important sections */
+    /* Prevent page breaks */
     .exec-summary, .facts, .banking-table, .collateral-box,
-    .verification-status, .notary, .sigs{
+    .verification-status, .notary, .sigs, .card{
       page-break-inside:avoid;
     }
+    
+    /* Reduce spacing for print */
+    .hr{margin:3mm 0;}
+    .exec-summary, .banking-table, .collateral-box, 
+    .verification-status, .notary{margin:3mm 0;}
+    .title{margin:3mm 0 2mm 0;}
   }
 
   /* Responsive */
@@ -201,24 +209,20 @@
 
 <!-- Screen Toolbar -->
 <div class="toolbar">
-  <div class="toolbar-title">🏦 AE Core Token — Certified Banking Certificate</div>
+  <div class="toolbar-title">🏦 AE Core Token — Banking Certificate for Jonathan Granger, CEO</div>
   <div class="toolbar-buttons">
     <button onclick="verifyAndSeal()">🔐 Verify On-Chain</button>
     <button onclick="downloadCertificate()">💾 Download HTML</button>
-    <button onclick="window.print()">🖨️ Print</button>
+    <button onclick="window.print()">🖨️ Print Certificate</button>
   </div>
 </div>
 
-<!-- Fixed header/footer for print -->
+<!-- Print header (hidden on screen) -->
 <div class="print-header">
   <div class="brand">
     <div class="seal">AVA</div>
     <div>THE AEON-PROOF ARCHIVE • FLAME Sovereign Verification</div>
   </div>
-</div>
-<div class="print-footer">
-  <div class="mono">Certified Print • PFC-2025-001-7B3A</div>
-  <div class="mono" id="footer-seal">Seal: [Click Verify On-Chain]</div>
 </div>
 
 <!-- A4 Page -->
@@ -226,7 +230,7 @@
 
   <section class="title">
     <h1>CERTIFIED BANKING CERTIFICATE — AE CORE TOKEN (ERC-721)</h1>
-    <div class="subtitle">Digital Title Certificate • Traditional Banking Instrument • CUSIP Equivalence</div>
+    <div class="subtitle">Digital Title Certificate • CUSIP Equivalence • PFC-2025-001-7B3A</div>
   </section>
 
   <div class="hr"></div>
@@ -237,12 +241,12 @@
     <p><strong>What this is:</strong> An ERC-721 token is a digital certificate of title on a public ledger. Each token carries a unique serial number and cannot be duplicated. It's not cryptocurrency—it represents an individual asset, like a registered instrument or warehouse receipt.</p>
     <p><strong>Key distinctions:</strong></p>
     <ul>
-      <li><strong>Custody:</strong> Token sits in secure wallet (digital vault). Custodian controls keys.</li>
+      <li><strong>Custody:</strong> Token in secure wallet (digital vault). Custodian controls keys.</li>
       <li><strong>Compliance:</strong> Unique serial + immutable history = complete audit trail. No hidden liens.</li>
       <li><strong>Settlement:</strong> Transfers in ~15 min vs T+2. Blockchain = irrevocable transfer.</li>
       <li><strong>Timeline:</strong> Central banks target 2030-2033. This is 5-8 years ahead operationally.</li>
     </ul>
-    <p><strong>Bottom line:</strong> Pre-compliant digital collateral that does everything future tokenized infrastructure will do—available today.</p>
+    <p><strong>Bottom line:</strong> Pre-compliant digital collateral. Does everything future tokenized infrastructure will do—available today.</p>
   </section>
 
   <!-- Identity & Contract -->
@@ -250,22 +254,22 @@
     <div class="card">
       <h3>Issuer & Registry (Paper ⇄ Digital)</h3>
       <div class="kv">
-        <div>Issuer / Originator</div><div>The Aeonic Verification Assembly (AVA)</div>
+        <div>Issuer</div><div>Aeonic Verification Assembly (AVA)</div>
         <div>Legal Wrapper</div><div>Purpose Trust / Segregated Vehicle</div>
-        <div>Registrar (Digital)</div><div>Ethereum Mainnet (immutable)</div>
+        <div>Registrar</div><div>Ethereum Mainnet (immutable)</div>
         <div>CUSIP Equivalent</div><div>Token ID on ERC-721 contract</div>
-        <div>Registry Reference</div><div>PFC-2025-001-7B3A</div>
+        <div>Reference</div><div>PFC-2025-001-7B3A</div>
       </div>
     </div>
 
     <div class="card">
       <h3>Contract Coordinates (Audit)</h3>
       <div class="kv mono">
-        <div>Contract (ERC-721)</div>
+        <div>Contract</div>
         <div id="contractAddr">0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180</div>
         <div>Token ID</div>
         <div id="tokenId">1</div>
-        <div>Controller Address</div>
+        <div>Controller</div>
         <div id="controllerAddr">0xAefd8aa7EcfCFA8041Dc66796A6eF673D108e36b</div>
         <div>Mint TX</div>
         <div id="mintTx">0x3c686f30...7e8ac2</div>
@@ -279,19 +283,19 @@
     <table>
       <thead>
         <tr>
-          <th>Traditional Banking Concept</th>
+          <th>Traditional Banking</th>
           <th>Digital Equivalent (ERC-721)</th>
           <th>Verification</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>CUSIP / Certificate Number</td>
+          <td>CUSIP / Certificate No.</td>
           <td class="mono">Token ID = 1</td>
           <td>Immutable on-chain</td>
         </tr>
         <tr>
-          <td>Registrar Entry / Folio</td>
+          <td>Registrar Entry</td>
           <td class="mono">Mint TX Hash</td>
           <td>Blockchain record</td>
         </tr>
@@ -301,28 +305,23 @@
           <td>Live ownerOf() query</td>
         </tr>
         <tr>
-          <td>Trust Indenture / Issuer</td>
-          <td class="mono">Smart Contract Address</td>
-          <td>Public, auditable code</td>
+          <td>Trust Indenture</td>
+          <td class="mono">Smart Contract</td>
+          <td>Public code</td>
         </tr>
         <tr>
           <td>Vault / Custodian</td>
-          <td>Secure Wallet (Multi-sig)</td>
-          <td>Institutional custody</td>
+          <td>Secure Wallet</td>
+          <td>Multi-sig custody</td>
         </tr>
         <tr>
-          <td>Transfer Authorization</td>
-          <td>Cryptographic Signature (ECDSA)</td>
-          <td>Banking-grade crypto</td>
-        </tr>
-        <tr>
-          <td>Audit Trail</td>
-          <td>Complete Transaction History</td>
-          <td>Public explorer</td>
+          <td>Transfer Auth</td>
+          <td>Crypto Signature</td>
+          <td>ECDSA proof</td>
         </tr>
       </tbody>
     </table>
-    <div class="note"><strong>Banker's Note:</strong> For repo/pledge intake, treat Token ID as certificate number; treat mint TX as registrar folio; treat contract address as trust indenture reference.</div>
+    <div class="note"><strong>Note:</strong> Treat Token ID as certificate number; mint TX as registrar folio; contract address as trust indenture reference.</div>
   </section>
 
   <!-- Collateral Schedule -->
@@ -337,130 +336,101 @@
       <div class="collateral-item">
         <div class="collateral-label">Release Authorization</div>
         <div class="collateral-value">$1,000,000,000</div>
-        <div class="note">GB Dynamics Inc. • Jonathan Granger, CEO</div>
+        <div class="note">GB Dynamics Inc.</div>
+        <p class="ceo-line">CEO: Jonathan Granger</p>
       </div>
     </div>
     <table>
       <tbody>
         <tr>
           <td><strong>Authorized Recipient</strong></td>
-          <td>GB Dynamics Inc. • Jonathan Granger, CEO</td>
+          <td><strong>GB Dynamics Inc. — CEO: Jonathan Granger</strong></td>
         </tr>
         <tr>
-          <td><strong>Collateralization Ratio</strong></td>
+          <td><strong>Coverage Ratio</strong></td>
           <td>18.2:1 (exceptional over-collateralization)</td>
         </tr>
         <tr>
-          <td><strong>Portfolio Utilization</strong></td>
+          <td><strong>Utilization</strong></td>
           <td>5.49% of available collateral</td>
         </tr>
         <tr>
-          <td><strong>Settlement Method</strong></td>
-          <td>Traditional bank wire transfer (NOT crypto transfer)</td>
+          <td><strong>Settlement</strong></td>
+          <td>Traditional bank wire (NOT crypto transfer)</td>
         </tr>
         <tr>
-          <td><strong>Authorization Status</strong></td>
-          <td>Irrevocable & non-repudiable (similar to LC)</td>
+          <td><strong>Status</strong></td>
+          <td>Irrevocable & non-repudiable</td>
         </tr>
       </tbody>
     </table>
-    <div class="note" style="margin-top:8px;"><strong>Critical:</strong> The $1B authorization to GB Dynamics Inc. (Jonathan Granger, CEO) moves via traditional wire from banking institution. Blockchain provides cryptographic proof of authorization—bank executes wire based on this proof.</div>
+    <div class="note" style="margin-top:6px;"><strong>Critical:</strong> $1B authorization to GB Dynamics Inc. (Jonathan Granger, CEO) moves via traditional wire. Blockchain provides cryptographic proof—bank executes wire based on this proof.</div>
   </section>
 
   <!-- Verification Status -->
   <section class="verification-status">
     <h3>🔍 Live Verification Status</h3>
-    <div class="status-text" id="verificationStatus">⏳ Ready to verify — Click "Verify On-Chain" to connect to Ethereum mainnet</div>
+    <div class="status-text" id="verificationStatus">⏳ Ready to verify — Click "Verify On-Chain" button above</div>
   </section>
 
   <!-- Cryptographic Notary -->
   <section class="notary">
-    <h3>Cryptographic Notary Block (Deterministic Seal)</h3>
-    <div class="kv mono" style="row-gap:6px; margin-top:6px;">
+    <h3>Cryptographic Notary Block</h3>
+    <div class="kv mono" style="row-gap:5px; margin-top:5px;">
       <div>Attestation Nonce</div><div>c9bb59fe5b9dd943d4757692b977fbbb</div>
       <div>Message Hash</div><div>0xf4513db63b078a06c02995af41f3f0b6801aa6c4eda949f9174e01dfada9661c</div>
-      <div>Seal — SHA-256</div><div id="sealSha256">—</div>
-      <div>Seal — Keccak-256</div><div id="sealKeccak">—</div>
+      <div>SHA-256 Seal</div><div id="sealSha256">—</div>
+      <div>Keccak-256 Seal</div><div id="sealKeccak">—</div>
       <div>Timestamp (UTC)</div><div id="sealTimestamp">—</div>
       <div>Live Ownership</div><div id="ownStatus">Pending</div>
     </div>
-    <div class="note" style="margin-top:6px;">
-      This seal hashes the certificate exactly as displayed. Any alteration changes digests, invalidating the certificate. All data independently verifiable on Ethereum blockchain.
+    <div class="note" style="margin-top:5px;">
+      This seal hashes the certificate. Any alteration changes digests. All data independently verifiable on Ethereum blockchain.
     </div>
   </section>
 
   <!-- Portfolio Documents -->
-  <section class="card" style="margin-top:4mm;">
-    <h3>Verified Portfolio Documents (Merkle Tree)</h3>
-    <div style="font-size:11.5px; line-height:1.4; margin-top:6px;">
-      <div style="margin-bottom:3px;">• FLAME Authorization Certificate v1.0</div>
-      <div style="margin-bottom:3px;">• Lien Portfolio Attestation ($18.2B USD)</div>
-      <div style="margin-bottom:3px;">• Controller Authority Documentation</div>
-      <div style="margin-bottom:3px;">• Sovereign Framework Activation Record</div>
-      <div style="margin-bottom:3px;">• Legal Attestation Bundle (35 USC §284 + 12 USC §3903 + 31 USC §3730)</div>
+  <section class="card" style="margin-top:3mm;">
+    <h3>Verified Portfolio Documents</h3>
+    <div style="font-size:11px; line-height:1.4; margin-top:5px;">
+      <div>• FLAME Authorization Certificate v1.0</div>
+      <div>• Lien Portfolio Attestation ($18.2B USD)</div>
+      <div>• Controller Authority Documentation</div>
+      <div>• Sovereign Framework Activation Record</div>
+      <div>• Legal Attestation Bundle</div>
     </div>
-    <div class="note" style="margin-top:6px;">
-      <strong>Merkle Root:</strong> <span class="mono" id="merkleRoot">0x[computed on verification]</span>
+    <div class="note" style="margin-top:5px;">
+      <strong>Merkle Root:</strong> <span class="mono" id="merkleRoot">0x[computed]</span>
     </div>
-  </section>
-
-  <!-- Operational Integration -->
-  <section class="card" style="margin-top:4mm;">
-    <h3>Operational Integration — Bank System Compatibility</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Banking Function</th>
-          <th>Integration Method</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Title Verification</td>
-          <td>RPC node query: ownerOf(tokenId) via REST API (~15 sec)</td>
-        </tr>
-        <tr>
-          <td>Ledger Posting</td>
-          <td>Middleware listener + core banking API</td>
-        </tr>
-        <tr>
-          <td>Custody</td>
-          <td>Institutional wallet (Coinbase Custody, Fireblocks)</td>
-        </tr>
-        <tr>
-          <td>Transfer Authorization</td>
-          <td>Approval workflow → cryptographic signature</td>
-        </tr>
-        <tr>
-          <td>Audit / Compliance</td>
-          <td>Blockchain explorer + transaction export to CSV</td>
-        </tr>
-      </tbody>
-    </table>
   </section>
 
   <!-- Signatures -->
   <section class="sigs">
     <div class="sig">
-      Authorized Signatory — Issuer / AVA<br/>
-      <span class="gold">Digital ECDSA signature on record</span>
+      Authorized Signatory — AVA<br/>
+      <span class="gold">Digital ECDSA on record</span>
     </div>
     <div class="sig">
-      Custodian Acknowledgment<br/>
-      <span class="gold">Cryptographic verification via blockchain</span>
+      Recipient Acknowledgment<br/>
+      <span class="gold">Jonathan Granger, CEO</span>
     </div>
   </section>
 
   <!-- Footer -->
-  <div style="text-align:center; margin-top:6mm; padding-top:4mm; border-top:1px solid var(--rule);">
-    <p style="font-size:11px; color:#555;">
-      <strong>Issued by:</strong> The Aeonic Verification Assembly (AVA) • Independent third-party verification<br/>
-      Framework: FLAME Sovereign Verification Protocol | Reference: PFC-2025-001-7B3A<br/>
-      <em style="font-size:10.5px;">All verification operations use standard mathematical procedures and can be independently confirmed</em>
+  <div style="text-align:center; margin-top:5mm; padding-top:3mm; border-top:1px solid var(--rule);">
+    <p style="font-size:10.5px; color:#555;">
+      <strong>Issued by:</strong> Aeonic Verification Assembly (AVA) • Framework: FLAME Sovereign Verification<br/>
+      <em style="font-size:10px;">Independent third-party verification • All operations use standard mathematical procedures</em>
     </p>
   </div>
 
 </main>
+
+<!-- Print footer (hidden on screen) -->
+<div class="print-footer">
+  <div class="mono">PFC-2025-001-7B3A • GB Dynamics Inc. — Jonathan Granger, CEO</div>
+  <div class="mono" id="footer-seal">Seal: [Verify to generate]</div>
+</div>
 
 <script>
 // Constants
@@ -468,8 +438,7 @@ const CONTRACT = "0x7bD550debE939a87843EE5Bd7aC9F0e21ab27180";
 const TOKEN_ID = "1";
 const MINT_TX = "0x3c686f30af14eeaaafe0b642579c8c039bd5214ef3df6a126af41b595e7e8ac2";
 
-// Initialize immediately
-console.log('Script loading...');
+console.log('=== Certificate Script Loading ===');
 
 // Hash functions
 function sha256Hex(s) {
@@ -505,16 +474,14 @@ function deriveMerkleRoot() {
 
 // Seal document
 function sealDocument() {
-  console.log('Computing seals...');
+  console.log('Computing cryptographic seals...');
   
   try {
-    const canonical = [CONTRACT, TOKEN_ID, MINT_TX, "PFC-2025-001-7B3A"].join("|");
+    const canonical = [CONTRACT, TOKEN_ID, MINT_TX, "PFC-2025-001-7B3A", "Jonathan Granger"].join("|");
     const sha = sha256Hex(canonical);
     const keccak = keccak256Hex(canonical);
     const root = deriveMerkleRoot();
     const timestamp = new Date().toISOString();
-    
-    console.log('Seals computed:', {sha: sha.slice(0,16), keccak: keccak.slice(0,16)});
     
     document.getElementById("sealSha256").innerText = "0x" + sha;
     document.getElementById("sealKeccak").innerText = "0x" + keccak;
@@ -522,100 +489,121 @@ function sealDocument() {
     document.getElementById("merkleRoot").innerText = root;
     document.getElementById("footer-seal").innerText = "Seal: 0x" + keccak.slice(0,12) + "...";
     
-    console.log('✓ Seals updated in DOM');
+    console.log('✓ Seals computed successfully');
+    console.log('  SHA-256:', '0x' + sha.slice(0,16) + '...');
+    console.log('  Keccak-256:', '0x' + keccak.slice(0,16) + '...');
     
     return {sha, keccak, root, timestamp};
   } catch(e) {
-    console.error('Error computing seals:', e);
-    alert('Error computing cryptographic seals: ' + e.message);
+    console.error('✗ Error computing seals:', e);
     return null;
   }
 }
 
-// Verify on-chain
+// Verify on-chain with robust error handling
 async function verifyAndSeal() {
-  console.log('=== Starting verification ===');
+  console.log('\n=== Starting On-Chain Verification ===');
   
   const statusDiv = document.getElementById("verificationStatus");
   const ownerField = document.getElementById("liveOwner");
   const ownStatus = document.getElementById("ownStatus");
   
+  // Step 1: Compute seals first (always works)
+  console.log('Step 1: Computing seals...');
+  statusDiv.innerHTML = '⏳ Computing cryptographic seals...';
+  
+  const seals = sealDocument();
+  if (!seals) {
+    alert('Failed to compute seals. Check console.');
+    return false;
+  }
+  
+  console.log('✓ Step 1 complete');
+  
+  // Step 2: Try blockchain verification
+  console.log('Step 2: Attempting blockchain connection...');
   statusDiv.innerHTML = '⏳ Connecting to Ethereum mainnet...';
   ownerField.innerText = 'Querying...';
   ownStatus.innerText = 'Querying...';
   
-  // First, compute seals regardless
-  console.log('Step 1: Computing cryptographic seals...');
-  const seals = sealDocument();
-  
-  if (!seals) {
-    alert('Failed to compute cryptographic seals. Check console for errors.');
-    return false;
-  }
-  
-  // Now try on-chain verification
   try {
-    console.log('Step 2: Checking ethers library...');
-    
+    // Check ethers
     if (typeof ethers === 'undefined') {
-      throw new Error('Ethers.js library not loaded. Please refresh the page.');
+      throw new Error('Ethers library not loaded');
+    }
+    console.log('✓ Ethers loaded');
+    
+    // Try multiple providers
+    console.log('Creating provider...');
+    let provider;
+    let providerUrl;
+    
+    const providers = [
+      'https://eth.llamarpc.com',
+      'https://rpc.ankr.com/eth',
+      'https://cloudflare-eth.com'
+    ];
+    
+    let lastError;
+    for (const url of providers) {
+      try {
+        console.log('Trying:', url);
+        provider = new ethers.providers.JsonRpcProvider(url);
+        await provider.getBlockNumber(); // Test connection
+        providerUrl = url;
+        console.log('✓ Connected via', url);
+        break;
+      } catch(e) {
+        console.log('✗ Failed:', url, e.message);
+        lastError = e;
+      }
     }
     
-    console.log('✓ Ethers loaded');
-    console.log('Step 3: Creating provider...');
+    if (!provider) {
+      throw new Error('All RPC providers failed. ' + lastError.message);
+    }
     
-    const provider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth');
-    
-    console.log('Step 4: Testing connection...');
-    const blockNumber = await provider.getBlockNumber();
-    console.log('✓ Connected to Ethereum. Current block:', blockNumber);
-    
-    console.log('Step 5: Creating contract...');
+    // Query blockchain
+    console.log('Querying contract...');
     const abi = ['function ownerOf(uint256) view returns (address)'];
     const contract = new ethers.Contract(CONTRACT, abi, provider);
-    console.log('✓ Contract created');
-    
-    console.log('Step 6: Querying owner...');
     const owner = await contract.ownerOf(TOKEN_ID);
     const ownerLower = owner.toLowerCase();
     
     console.log('✓ Owner retrieved:', ownerLower);
     
-    // Update UI with owner
+    // Update UI
     ownerField.innerText = ownerLower;
     ownStatus.innerText = 'ownerOf(1) = ' + ownerLower;
-    statusDiv.innerHTML = '✓ <strong>CRYPTOGRAPHICALLY VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px; font-weight:normal;">Owner: ' + ownerLower + '</span>';
+    statusDiv.innerHTML = '✓ <strong>VERIFIED</strong> — Ownership confirmed on Ethereum Mainnet<br/><span style="font-size:11px;">Owner: ' + ownerLower + '</span>';
     
-    console.log('=== Verification complete ===');
+    console.log('=== Verification Complete ===\n');
     
     alert('✓ VERIFICATION COMPLETE!\n\n' +
-          '🔗 Blockchain:\n' +
-          'Owner: ' + ownerLower + '\n' +
-          'Block: ' + blockNumber + '\n\n' +
+          '🔗 Blockchain Owner:\n' + ownerLower + '\n\n' +
           '🔐 Cryptographic Seals:\n' +
           'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
-          'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n' +
-          'Merkle Root: ' + seals.root.slice(0,18) + '...\n\n' +
-          '✓ Certificate is ready for print or download.');
+          'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
+          '✓ Certificate ready for print/download');
     
     return true;
     
   } catch(e) {
-    console.error('=== Verification error ===');
-    console.error('Error:', e);
+    console.error('=== Verification Failed ===');
+    console.error('Error:', e.message);
     
-    statusDiv.innerHTML = '⚠️ On-chain query failed, but seals are computed<br/><span style="font-size:11px;">Error: ' + e.message + '</span>';
-    ownerField.innerText = 'Could not verify (see console)';
+    statusDiv.innerHTML = '⚠️ Blockchain query failed (seals computed)<br/><span style="font-size:10.5px;">' + e.message + '</span>';
+    ownerField.innerText = 'Query failed (see console)';
     ownStatus.innerText = 'Query failed';
     
     alert('⚠️ On-Chain Verification Failed\n\n' +
           'Error: ' + e.message + '\n\n' +
-          '✓ Cryptographic seals were computed successfully:\n' +
+          '✓ Cryptographic seals computed:\n' +
           'SHA-256: 0x' + seals.sha.slice(0,16) + '...\n' +
           'Keccak-256: 0x' + seals.keccak.slice(0,16) + '...\n\n' +
-          'The certificate is still valid for print/download.\n' +
-          'On-chain owner can be verified manually at:\n' +
-          'https://etherscan.io/token/' + CONTRACT);
+          'Certificate is still valid for print.\n' +
+          'Owner can be verified manually at:\n' +
+          'etherscan.io/token/' + CONTRACT);
     
     return false;
   }
@@ -625,77 +613,45 @@ async function verifyAndSeal() {
 function downloadCertificate() {
   console.log('Downloading certificate...');
   
-  // Ensure seals are computed
+  // Ensure seals computed
   if (document.getElementById("sealKeccak").innerText === "—") {
-    console.log('Seals not computed, computing now...');
     sealDocument();
   }
   
-  // Clone entire document
+  // Clone and download
   const clone = document.documentElement.cloneNode(true);
-  
-  // Remove toolbar from clone
   const toolbar = clone.querySelector('.toolbar');
   if (toolbar) toolbar.remove();
   
-  // Create download
   const html = '<!DOCTYPE html>\n' + clone.outerHTML;
   const blob = new Blob([html], {type: 'text/html'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'AE-Core-Token-Banking-Certificate-PFC-2025-001-7B3A.html';
+  a.download = 'AE-Core-Banking-Certificate-Jonathan-Granger-PFC-2025-001-7B3A.html';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   
   console.log('✓ Download complete');
-  alert('✓ Certificate downloaded!\n\nFile: AE-Core-Token-Banking-Certificate-PFC-2025-001-7B3A.html');
+  alert('✓ Certificate downloaded!\n\nFilename: AE-Core-Banking-Certificate-Jonathan-Granger-PFC-2025-001-7B3A.html');
 }
 
-// Page initialization
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('=== Page loaded ===');
-  console.log('CryptoJS available:', typeof CryptoJS !== 'undefined');
-  console.log('Ethers available:', typeof ethers !== 'undefined');
+  console.log('=== Page Loaded ===');
+  console.log('CryptoJS:', typeof CryptoJS !== 'undefined' ? '✓' : '✗');
+  console.log('Ethers:', typeof ethers !== 'undefined' ? '✓' : '✗');
   
-  // Set mint TX abbreviation
+  // Set mint TX
   document.getElementById("mintTx").innerText = MINT_TX.slice(0,12) + "..." + MINT_TX.slice(-6);
   
-  // Check libraries
-  if (typeof CryptoJS === 'undefined') {
-    console.error('⚠️ CryptoJS failed to load!');
-    alert('Warning: Cryptography library failed to load. Please refresh the page.');
-    return;
-  }
+  // Auto-compute seals
+  console.log('Auto-computing seals...');
+  setTimeout(sealDocument, 100);
   
-  if (typeof ethers === 'undefined') {
-    console.warn('⚠️ Ethers.js not yet loaded. On-chain verification may not work.');
-  }
-  
-  // Auto-compute seals on load
-  console.log('Auto-computing seals on page load...');
-  setTimeout(function() {
-    sealDocument();
-  }, 100);
-  
-  console.log('=== Initialization complete ===');
-  console.log('Ready! Click "Verify On-Chain" button to verify ownership.');
-});
-
-// Also check when window fully loads (including external scripts)
-window.addEventListener('load', function() {
-  console.log('=== Window fully loaded ===');
-  console.log('Ethers available:', typeof ethers !== 'undefined');
-  
-  if (typeof ethers === 'undefined') {
-    console.error('⚠️ Ethers.js failed to load from CDN');
-    document.getElementById("verificationStatus").innerHTML = 
-      '⚠️ Blockchain library failed to load. Refresh page or verify manually at Etherscan.';
-  } else {
-    console.log('✓ All libraries loaded successfully');
-  }
+  console.log('=== Ready ===\n');
 });
 </script>
 
